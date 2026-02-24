@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background: radial-gradient(circle at top, #1a162d 0%, #0a0812 100%); color: #fff; font-family: 'Montserrat', sans-serif; text-align: center; padding-bottom: 150px; }
+        body { background: radial-gradient(circle at top, #1a162d 0%, #0a0812 100%); color: #fff; font-family: 'Montserrat', sans-serif; text-align: center; padding-bottom: 150px; min-height: 100vh; }
         
         header { padding: 60px 20px 30px; }
         .brand-sub { font-size: 12px; text-transform: uppercase; letter-spacing: 8px; color: #b0a9c9; display: block; margin-bottom: -10px; }
@@ -19,14 +19,14 @@
         .gallery img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s; }
         .gallery img.active { opacity: 1; }
 
-        .card-container { width: 92%; max-width: 400px; margin: 0 auto 20px; text-align: left; background: rgba(15, 12, 25, 0.6); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
+        .card-container { width: 92%; max-width: 400px; margin: 0 auto 20px; text-align: left; background: rgba(15, 12, 25, 0.6); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); transition: 0.5s; }
         .card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: #d1c9ff; margin-bottom: 20px; display: block; }
         
         .option { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid transparent; transition: 0.3s; }
         .option input { accent-color: #d1c9ff; transform: scale(1.2); margin-right: 12px; }
         
-        /* ESTILO QUANDO BLOQUEADO */
-        .agenda-fechada .option { opacity: 0.4; cursor: not-allowed; filter: grayscale(1); }
+        /* ESTILO AGENDA FECHADA */
+        .agenda-fechada .option { opacity: 0.3; cursor: not-allowed; filter: grayscale(1); }
         .agenda-fechada input { pointer-events: none; }
         .agenda-fechada #whatsapp-btn { display: none; }
 
@@ -42,7 +42,7 @@
     <header>
         <span class="brand-sub">studio</span>
         <h1 class="brand-main">julia jeniffer</h1>
-        <div id="status-display" class="status-box">Carregando...</div>
+        <div id="status-display" class="status-box">Verificando agenda...</div>
     </header>
 
     <div class="gallery" id="slide">
@@ -51,54 +51,62 @@
         <img src="unhas3.jpg">
     </div>
 
-    <div class="card-container" id="procedimentos-section">
+    <div class="card-container">
         <span class="card-title">Procedimentos</span>
         <label class="option">
-            <div class="info"><span class="name">Fibra de Vidro - Aplicação</span><span class="price">R$ 140,00</span></div>
+            <div class="info"><span class="name">Fibra de Vidro (Aplicação)</span><span class="price">R$ 140,00</span></div>
             <input type="checkbox" name="servico" value="Fibra de Vidro (Aplicação)">
         </label>
         <label class="option">
-            <div class="info"><span class="name">Fibra de Vidro - Manutenção</span><span class="price">R$ 90,00</span></div>
-            <input type="checkbox" name="servico" value="Fibra de Vidro (Manutenção)">
+            <div class="info"><span class="name">Molde F1 (Aplicação)</span><span class="price">R$ 110,00</span></div>
+            <input type="checkbox" name="servico" value="Molde F1 (Aplicação)">
         </label>
         <label class="option">
-            <div class="info"><span class="name">Banho de Gel - Aplicação</span><span class="price">R$ 90,00</span></div>
+            <div class="info"><span class="name">Banho de Gel (Aplicação)</span><span class="price">R$ 90,00</span></div>
             <input type="checkbox" name="servico" value="Banho de Gel (Aplicação)">
         </label>
     </div>
 
-    <div class="card-container" id="decoracao-section">
-        <span class="card-title">Decorações Opcionais</span>
+    <div class="card-container">
+        <span class="card-title">Decorações</span>
         <label class="option">
             <div class="info"><span class="name">Francesinha / Reversa</span></div>
             <input type="checkbox" name="decoracao" value="Francesinha/Reversa">
         </label>
         <label class="option">
-            <div class="info"><span class="name">Pedrarias / Glitter</span></div>
-            <input type="checkbox" name="decoracao" value="Pedrarias/Glitter">
+            <div class="info"><span class="name">Nail Art Personalizada</span></div>
+            <input type="checkbox" name="decoracao" value="Nail Art">
         </label>
     </div>
 
-    <a href="javascript:void(0)" onclick="finalizarPedido()" id="whatsapp-btn">Enviar Orçamento no Zap</a>
+    <a href="javascript:void(0)" onclick="finalizarPedido()" id="whatsapp-btn">Agendar via WhatsApp</a>
 
     <script>
-        /*******************************************************
-         * CONTROLE DA AGENDA AQUI:
-         * 1 = Aberta (Permite marcar e mostra botão)
-         * 0 = Fechada (Bloqueia marcação e esconde botão)
-         *******************************************************/
-        const AGENDA_STATUS = 1; 
+        const LINK_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSJvDY5sNjQEvBruInWnurZpqVr0H6M_R_hIp9-CfACaHiDU0cfb-TkdQ44WRrEqL3KFZL_uqVJt6VX/pub?output=csv";
 
-        // Lógica de Bloqueio
-        const body = document.body;
-        const statusDisplay = document.getElementById('status-display');
+        async function sincronizarAgenda() {
+            try {
+                const response = await fetch(LINK_CSV + "&cache=" + new Date().getTime());
+                const csvText = await response.text();
+                const linhas = csvText.split('\n');
+                const status = linhas[1].split(',')[0].trim(); // Pega o valor da célula A2
 
-        if (AGENDA_STATUS === 0) {
-            body.classList.add('agenda-fechada');
-            statusDisplay.innerHTML = "🔒 Agenda Temporariamente Fechada";
-        } else {
-            statusDisplay.innerHTML = "✨ Agenda Aberta — Garanta seu horário";
+                const body = document.body;
+                const statusDisplay = document.getElementById('status-display');
+
+                if (status === "0") {
+                    body.classList.add('agenda-fechada');
+                    statusDisplay.innerHTML = "🔒 Agenda Temporariamente Fechada";
+                } else {
+                    body.classList.remove('agenda-fechada');
+                    statusDisplay.innerHTML = "✨ Agenda Aberta — Garanta seu horário";
+                }
+            } catch (e) {
+                document.getElementById('status-display').innerHTML = "✨ Studio Julia Jeniffer";
+            }
         }
+
+        sincronizarAgenda();
 
         // Carrossel
         const imgs = document.querySelectorAll('#slide img');
@@ -112,22 +120,16 @@
         }, 3000);
 
         function finalizarPedido() {
-            if(AGENDA_STATUS === 0) return;
-
             const servicos = [];
-            const decoracoes = [];
             document.querySelectorAll('input[name="servico"]:checked').forEach(i => servicos.push(i.value));
-            document.querySelectorAll('input[name="decoracao"]:checked').forEach(i => decoracoes.push(i.value));
+            document.querySelectorAll('input[name="decoracao"]:checked').forEach(i => servicos.push(i.value));
 
             if(servicos.length === 0) {
-                alert("Selecione pelo menos um procedimento!");
+                alert("Selecione um serviço primeiro!");
                 return;
             }
 
-            let texto = "Olá Julia! Gostaria de um horário para:\n";
-            texto += "\n*Serviço:* " + servicos.join(", ");
-            if(decoracoes.length > 0) texto += "\n*Decoração:* " + decoracoes.join(", ");
-
+            let texto = "Olá Julia! Gostaria de um horário para:\n• " + servicos.join("\n• ");
             window.open("https://wa.me/5514997023929?text=" + encodeURIComponent(texto), '_blank');
         }
     </script>
