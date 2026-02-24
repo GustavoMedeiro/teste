@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Julia Jeniffer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: radial-gradient(circle at top, #1a162d 0%, #0a0812 100%); color: #fff; font-family: 'Montserrat', sans-serif; text-align: center; padding-bottom: 150px; }
+        
+        header { padding: 60px 20px 30px; }
+        .brand-sub { font-size: 12px; text-transform: uppercase; letter-spacing: 8px; color: #b0a9c9; display: block; margin-bottom: -10px; font-weight: 200; }
+        .brand-main { font-family: 'Playfair Display', serif; font-size: 48px; font-weight: 700; text-transform: lowercase; letter-spacing: -2px; font-style: italic; text-shadow: 0 0 20px rgba(209, 201, 255, 0.3); }
+
+        .gallery { width: 320px; height: 450px; margin: 0 auto 40px; position: relative; overflow: hidden; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .gallery img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1.5s; }
+        .gallery img.active { opacity: 1; }
+
+        /* Estilo dos Cards de Seleção */
+        .card-container { width: 92%; max-width: 400px; margin: 0 auto 20px; text-align: left; background: rgba(15, 12, 25, 0.6); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-style: italic; color: #d1c9ff; margin-bottom: 20px; display: block; }
+        
+        .option { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 10px; border-radius: 10px; background: rgba(255, 255, 255, 0.03); cursor: pointer; transition: 0.3s; }
+        .option:hover { background: rgba(255, 255, 255, 0.08); }
+        .option input { accent-color: #d1c9ff; transform: scale(1.2); margin-right: 12px; }
+        .info { flex: 1; }
+        .name { font-size: 13px; font-weight: 400; }
+        .price { font-size: 11px; color: #b0a9c9; display: block; }
+
+        .address-card { width: 92%; max-width: 400px; margin: 20px auto 40px; padding: 20px; text-align: left; color: #888; border-top: 1px solid #222; }
+
+        .whatsapp-btn { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #ffffff; color: #000; padding: 22px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 13px; width: 85%; max-width: 320px; box-shadow: 0 15px 35px rgba(0,0,0,0.7); z-index: 1000; text-transform: uppercase; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="brand-sub">studio</span>
+        <h1 class="brand-main">julia jeniffer</h1>
+    </header>
+
+    <div class="gallery" id="slide">
+        <img src="unhas1.jpg" class="active">
+        <img src="unhas2.jpg">
+        <img src="unhas3.jpg">
+    </div>
+
+    <div class="card-container">
+        <span class="card-title">Procedimentos</span>
+        
+        <p style="font-size: 11px; color: #666; margin-bottom: 8px;">Alongamento</p>
+        <label class="option">
+            <div class="info"><span class="name">Fibra de Vidro - Aplicação</span><span class="price">R$ 140,00</span></div>
+            <input type="checkbox" name="servico" value="Fibra de Vidro (Aplicação)">
+        </label>
+        <label class="option">
+            <div class="info"><span class="name">Fibra de Vidro - Manutenção</span><span class="price">R$ 90,00</span></div>
+            <input type="checkbox" name="servico" value="Fibra de Vidro (Manutenção)">
+        </label>
+        
+        <p style="font-size: 11px; color: #666; margin: 15px 0 8px;">Banho de Gel / Blindagem</p>
+        <label class="option">
+            <div class="info"><span class="name">Banho de Gel - Aplicação</span><span class="price">R$ 90,00</span></div>
+            <input type="checkbox" name="servico" value="Banho de Gel (Aplicação)">
+        </label>
+        <label class="option">
+            <div class="info"><span class="name">Blindagem - Aplicação</span><span class="price">R$ 70,00</span></div>
+            <input type="checkbox" name="servico" value="Blindagem (Aplicação)">
+        </label>
+    </div>
+
+    <div class="card-container">
+        <span class="card-title">Decoração Adicional</span>
+        <label class="option">
+            <div class="info"><span class="name">Francesinha / Reversa</span></div>
+            <input type="checkbox" name="decoracao" value="Francesinha/Reversa">
+        </label>
+        <label class="option">
+            <div class="info"><span class="name">Pedrarias / Glitter</span></div>
+            <input type="checkbox" name="decoracao" value="Pedrarias/Glitter">
+        </label>
+        <label class="option">
+            <div class="info"><span class="name">Nail Art Personalizada</span></div>
+            <input type="checkbox" name="decoracao" value="Nail Art Personalizada">
+        </label>
+    </div>
+
+    <div class="address-card">
+        <p style="font-size: 12px;">📍 R. Frei Edgar, nº 138, Sala 307<br>Edifício Centro Professional - Joaçaba/SC</p>
+    </div>
+
+    <a href="javascript:void(0)" onclick="finalizarPedido()" class="whatsapp-btn">Enviar Orçamento no Zap</a>
+
+    <script>
+        // Carrossel
+        const imgs = document.querySelectorAll('#slide img');
+        let atual = 0;
+        setInterval(() => {
+            if(imgs.length > 0) {
+                imgs[atual].classList.remove('active');
+                atual = (atual + 1) % imgs.length;
+                imgs[atual].classList.add('active');
+            }
+        }, 3000);
+
+        function finalizarPedido() {
+            const servicos = [];
+            const decoracoes = [];
+            
+            document.querySelectorAll('input[name="servico"]:checked').forEach(i => servicos.push(i.value));
+            document.querySelectorAll('input[name="decoracao"]:checked').forEach(i => decoracoes.push(i.value));
+
+            let texto = "Olá Julia! Gostaria de agendar um horário para:\n";
+            
+            if(servicos.length > 0) {
+                texto += "\n*Procedimento:* " + servicos.join(", ");
+            }
+            if(decoracoes.length > 0) {
+                texto += "\n*Decoração:* " + decoracoes.join(", ");
+            }
+            
+            if(servicos.length === 0) {
+                alert("Por favor, selecione pelo menos um procedimento.");
+                return;
+            }
+
+            const url = "https://wa.me/5514997023929?text=" + encodeURIComponent(texto);
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
